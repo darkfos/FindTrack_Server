@@ -19,5 +19,6 @@ class DatabaseSettings(BaseSettings):
     db_port: str = Field(alias="DB_PORT")
 
     model_config = SettingsConfigDict(env_file="template.env")
+    db_echo: bool = True
 
-tst = DatabaseSettings()
+db_sett = DatabaseSettings()

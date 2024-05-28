@@ -4,12 +4,17 @@ from sqlalchemy import create_engine
 
 #Local
 from database.main_base import MainBase
+from database_settings import db_sett
 
 
 class Database:
 
     def __init__(self):
-        self.engine = create_engine(url=...)
+        self.engine = create_engine(
+            url="postgresql+asyncpg://{0}:{1}@{2}:{3}/{4}".format(db_sett.db_user, db_sett.db_password,
+                                                                  db_sett.db_host, db_sett.db_port, db_sett.db_name),
+            echo=db_sett.db_echo
+        )
         self.as_session_maker: async_sessionmaker = async_sessionmaker(bind=self.engine)
 
     async def get_session(self) -> AsyncSession:
