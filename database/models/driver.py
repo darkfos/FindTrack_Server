@@ -1,6 +1,6 @@
 #Other libraries
-from sqlalchemy import Integer, String, DateTime, Boolean, Text
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import Integer, String, DateTime, Text
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import Dict
 from datetime import datetime
 
@@ -23,6 +23,9 @@ class Driver(MainBase):
     #Question - ссылка на фото, или bytes -> (я понял как ссылка)
     passport_photo_main: Mapped[str] = mapped_column(name="passport_photo_main", type_=Text, nullable=True)
     passport_photo_registration: Mapped[str] = mapped_column(name="passport_photo_registration", nullable=True)
+
+    #Relation
+    order: Mapped["Order"] = relationship("Order", back_populates="driver")
 
     def __repr__(self):
         res_dict: Dict[str, str] = {

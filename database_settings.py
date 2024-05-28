@@ -21,4 +21,5 @@ class DatabaseSettings(BaseSettings):
     model_config = SettingsConfigDict(env_file="template.env")
     db_echo: bool = True
 
+
 db_sett = DatabaseSettings()
