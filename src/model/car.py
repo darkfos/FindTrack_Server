@@ -1,11 +1,11 @@
 #Other libraries
-from sqlalchemy import String, Integer, Text, Boolean, Enum
+from sqlalchemy import String, Integer, Text, Enum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import Dict
 
 
 #Local
-from database.main_base import MainBase
+from src.model.base import Base
 
 
 class BodyType(Enum):
@@ -22,7 +22,7 @@ class BodyDimension(Enum):
     ...
 
 
-class Car(MainBase):
+class Car(Base):
 
     name: Mapped[str] = mapped_column(name="name_car", type_=String(250), nullable=True, index=True)
     body_type: Mapped[str] = mapped_column(name="body_type", type_=Enum(BodyType), nullable=True)

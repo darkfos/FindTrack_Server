@@ -6,10 +6,10 @@ from datetime import datetime
 
 
 #Local
-from database.main_base import MainBase
+from src.model.base import Base
 
 
-class Driver(MainBase):
+class Driver(Base):
 
     first_name: Mapped[str] = mapped_column(name="first_name_driver", type_=String(150), nullable=True)
     last_name: Mapped[str] = mapped_column(name="last_name_driver", type_=String(150), nullable=True)

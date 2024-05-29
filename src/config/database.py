@@ -3,8 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 from sqlalchemy import create_engine
 
 #Local
-from database.main_base import MainBase
-from database_settings import db_sett
+from src.model.base import Base
 
 
 class Database:
@@ -28,7 +27,7 @@ class Database:
         """
 
         async with self.engine.begin() as engine:
-            await engine.run_sync(MainBase.metadata.create_all)
+            await engine.run_sync(Base.metadata.create_all)
 
 
 db_obj: Database = Database()

@@ -1,20 +1,19 @@
 #Other libraries
-from sqlalchemy import Integer, Text, String, Boolean, DateTime
+from sqlalchemy import Integer, String, DateTime, Boolean
 from sqlalchemy.orm import Mapped, mapped_column
-from typing import Dict
 from datetime import datetime
-
+from typing import Dict
 
 #Local
-from database.main_base import MainBase
+from src.model.base import Base
 
 
-class Customer(MainBase):
+class Carrier(Base):
 
-    com_name: Mapped[str] = mapped_column(name="company_name", type_=String(350), index=True, nullable=True)
+    com_name: Mapped[int] = mapped_column(name="company_name", type_=Integer, index=True, nullable=True)
     status: Mapped[bool] = mapped_column(name="status", type_=Boolean, index=False, nullable=False)
-    inn: Mapped[int] = mapped_column(name="inn_customer", type_=Integer, nullable=True)
-    ogrn: Mapped[int] = mapped_column(name="ogrn_customer", type_=Integer, nullable=False)
+    inn: Mapped[int] = mapped_column(name="inn_carrier", type_=Integer, nullable=True)
+    ogrn: Mapped[int] = mapped_column(name="ogrn_carrier", type_=Integer, nullable=False)
     kpp: Mapped[int] = mapped_column(name="kpp_customer", type_=Integer, nullable=False)
     checking_account: Mapped[bool] = mapped_column(name="checking_account", type_=Boolean, nullable=True)
     correpondent_account: Mapped[bool] = mapped_column(name="correpondent_account", type_=Boolean, nullable=False)
@@ -29,9 +28,9 @@ class Customer(MainBase):
         default=datetime.utcnow,
         onupdate=datetime.utcnow
     )
-    total_orders: Mapped[int] = mapped_column(name="total_orders", type_=Integer, nullable=False, default=0)
+    taken_orders: Mapped[int] = mapped_column(name="taken_orders", type_=Integer, nullable=False, default=0)
     completed_orders: Mapped[int] = mapped_column(name="completed_orders", type_=Integer, nullable=False, default=0)
-    rating : Mapped[int] = mapped_column(name="rating", type_=Integer, nullable=False)
+    rating: Mapped[int] = mapped_column(name="rating", type_=Integer, nullable=False, default=0)
 
     def __repr__(self):
         res_dict: Dict[str, str] = {

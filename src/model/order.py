@@ -6,7 +6,7 @@ from datetime import datetime
 
 
 #Local
-from database.main_base import MainBase
+from src.model.base import Base
 
 
 class StatusOrder(Enum):
@@ -15,7 +15,7 @@ class StatusOrder(Enum):
     COMPLETED: str = "Завершен"
 
 
-class Order(MainBase):
+class Order(Base):
 
     cargo_name: Mapped[str] = mapped_column(name="cargo_name", type_=String(300), index=True, nullable=True)
     departure_address: Mapped[str] = mapped_column(name="departure_address", type_=String(350),
