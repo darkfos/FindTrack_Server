@@ -4,15 +4,16 @@ from sqlalchemy import create_engine
 
 #Local
 from src.model.base import Base
+from src.config.database_settings import db
 
 
 class Database:
 
     def __init__(self):
         self.engine = create_engine(
-            url="postgresql+asyncpg://{0}:{1}@{2}:{3}/{4}".format(db_sett.db_user, db_sett.db_password,
-                                                                  db_sett.db_host, db_sett.db_port, db_sett.db_name),
-            echo=db_sett.db_echo
+            url="postgresql+asyncpg://{0}:{1}@{2}:{3}/{4}".format(db.db_user, db.db_password,
+                                                                  db.db_host, db.db_port, db.db_name),
+            echo=db.db_echo
         )
         self.as_session_maker: async_sessionmaker = async_sessionmaker(bind=self.engine)
 
