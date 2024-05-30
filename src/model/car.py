@@ -1,5 +1,5 @@
 #Other libraries
-from sqlalchemy import String, Integer, Text
+from sqlalchemy import String, Integer, Text, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import Dict
 
@@ -28,9 +28,11 @@ class Car(Base):
                                                              type_=Text, nullable=False)
     photo_trailer_passport_additional: Mapped[str] = mapped_column(name="photo_trailer_passport_additional",
                                                                    type_=Text, nullable=False)
+    id_carrier: Mapped[int] = mapped_column(ForeignKey("Carrier.id"), name="id_carrier")
 
-    #Relation
+    #Relations
     order: Mapped["Order"] = relationship("Order", back_populates="car")
+    carrier: Mapped["Carrier"] = relationship("Carrier", back_populates="car")
 
     def __repr__(self):
 

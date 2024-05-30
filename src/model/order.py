@@ -24,8 +24,9 @@ class Order(Base):
     status: Mapped[str] = mapped_column(name="status", type_=String(150), nullable=True)
 
     #Foreign key
-    driver_id: Mapped[int] = mapped_column(ForeignKey("Driver.id"), type_=Integer)
-    car_id: Mapped[int] = mapped_column(ForeignKey("Car.id"), type_=Integer)
+    driver_id: Mapped[int] = mapped_column(ForeignKey("Driver.id"), type_=Integer, name="id_driver")
+    car_id: Mapped[int] = mapped_column(ForeignKey("Car.id"), type_=Integer, name="id_car")
+    customer_id: Mapped[int] = mapped_column(ForeignKey("Customer.id"), type_=Integer, name="id_customer")
 
     #Relations
     driver: Mapped["Driver"] = relationship("Driver", back_populates="order")

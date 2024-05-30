@@ -1,5 +1,5 @@
 #Other libraries
-from sqlalchemy import Integer, String, DateTime, Text
+from sqlalchemy import Integer, String, DateTime, Text, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import Dict
 from datetime import datetime
@@ -23,9 +23,11 @@ class Driver(Base):
     #Question - ссылка на фото, или bytes -> (я понял как ссылка)
     passport_photo_main: Mapped[str] = mapped_column(name="passport_photo_main", type_=Text, nullable=True)
     passport_photo_registration: Mapped[str] = mapped_column(name="passport_photo_registration", nullable=True)
+    id_carrier: Mapped[int] = mapped_column(ForeignKey("Carrier.id"), name="id_carrier")
 
     #Relation
     order: Mapped["Order"] = relationship("Order", back_populates="driver")
+    carrier: Mapped["Carrier"] = relationship("Carrier", back_populates="driver")
 
     def __repr__(self):
         res_dict: Dict[str, str] = {

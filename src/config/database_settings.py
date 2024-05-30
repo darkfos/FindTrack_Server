@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from os import getenv
 
-load_dotenv("../../.env.dev")
+load_dotenv("../../.env")
 
 
 class DatabaseSettingsForConnection:

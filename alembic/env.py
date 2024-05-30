@@ -30,8 +30,7 @@ target_metadata = Base.metadata
 from dotenv import load_dotenv
 from os import getenv
 
-load_dotenv('.env.dev')
-print(getenv("DB_HOST"))
+load_dotenv('.env')
 
 config.set_main_option(
     name="sqlalchemy.url",
