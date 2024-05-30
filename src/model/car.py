@@ -1,7 +1,7 @@
 #Other libraries
 from sqlalchemy import String, Integer, Text, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from typing import Dict
+from typing import Dict, List
 
 
 #Local
@@ -31,8 +31,9 @@ class Car(Base):
     id_carrier: Mapped[int] = mapped_column(ForeignKey("Carrier.id"), name="id_carrier")
 
     #Relations
-    order: Mapped["Order"] = relationship("Order", back_populates="car")
-    carrier: Mapped["Carrier"] = relationship("Carrier", back_populates="car")
+    carrier: Mapped["Carrier"] = relationship(back_populates="car_carrier", uselist=False)
+    order: Mapped[List["Order"]] = relationship(back_populates="car", uselist=True)
+
 
     def __repr__(self):
 

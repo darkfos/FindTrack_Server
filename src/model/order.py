@@ -29,8 +29,8 @@ class Order(Base):
     customer_id: Mapped[int] = mapped_column(ForeignKey("Customer.id"), type_=Integer, name="id_customer")
 
     #Relations
-    driver: Mapped["Driver"] = relationship("Driver", back_populates="order")
-    car: Mapped["Car"] = relationship("Car", back_populates="order")
+    driver: Mapped["Driver"] = relationship(back_populates="order", uselist=False)
+    car: Mapped["Car"] = relationship(back_populates="order", uselist=False)
 
     def __repr__(self):
 

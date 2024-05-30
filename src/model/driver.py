@@ -26,8 +26,8 @@ class Driver(Base):
     id_carrier: Mapped[int] = mapped_column(ForeignKey("Carrier.id"), name="id_carrier")
 
     #Relation
-    order: Mapped["Order"] = relationship("Order", back_populates="driver")
-    carrier: Mapped["Carrier"] = relationship("Carrier", back_populates="driver")
+    order: Mapped["Order"] = relationship(back_populates="driver")
+    carrier: Mapped["Carrier"] = relationship(back_populates="driver")
 
     def __repr__(self):
         res_dict: Dict[str, str] = {

@@ -1,9 +1,11 @@
 #Other libraries
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, update, delete
+from sqlalchemy import select, update, delete, Result
 
 #Local
 from src.model.car import Car
+from src.config.database import db_obj
+import asyncio
 
 
 class CarRepository:
@@ -35,7 +37,16 @@ class CarRepository:
     @staticmethod
     async def get_all_car_for_id_carrier(session: AsyncSession, id_carrier: int):
         """
-        Get all car for carrier
+        Receipt of all carrier vehicles
         """
 
-        pass
+        res_sel_cars: Result = select(Car).where(Car.id_carrier == id_carrier)
+        result = (await session.execute(res_sel_cars)).fetchall()
+        print(result, type(result))
+
+
+async def main():
+    async with db_obj.as_session_maker.begin() as session:
+        await CarRepository.get_all_car_for_id_carrier(session=session, id_carrier=1)
+
+asyncio.run(main())
