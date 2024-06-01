@@ -31,7 +31,7 @@ class Customer(Base):
     )
     total_orders: Mapped[int] = mapped_column(name="total_orders", type_=Integer, nullable=False, default=0)
     completed_orders: Mapped[int] = mapped_column(name="completed_orders", type_=Integer, nullable=False, default=0)
-    rating : Mapped[int] = mapped_column(name="rating", type_=Integer, nullable=False)
+    rating: Mapped[int] = mapped_column(name="rating", type_=Integer, nullable=False)
 
     def __repr__(self):
         res_dict: Dict[str, str] = {

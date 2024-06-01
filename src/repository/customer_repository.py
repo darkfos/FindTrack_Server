@@ -4,86 +4,98 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List, Union
 
 #Local
-from src.model.order import Order
+from src.model.customer import Customer
 
 
-class OrderRepository:
+class CustomerRepository:
 
     @staticmethod
-    async def create_customer(session: AsyncSession, new_order: Order) -> bool:
+    async def create_customer(session: AsyncSession, new_customer: Customer) -> bool:
         """
         Create a new customer
         """
 
         try:
-            session.add(new_order)
+            session.add(new_customer)
             await session.commit()
             return True
         except Exception as ex:
             return False
 
     @staticmethod
-    async def get_order_by_id(session: AsyncSession, id_order: int) -> Union[Order, None]:
+    async def get_all_customers(session: AsyncSession) -> Union[List[Customer], List]:
         """
-        Find 1 order by id
+        Get information about all customers
         """
 
-        stmt = select(Order).where(Order.id == id_order)
-        order_by_id = (await session.execute(stmt)).one_or_none()
+        stmt = select(Customer)
+        all_customers = (await session.execute(stmt)).fetchall()
+        return all_customers
 
-        if order_by_id:
-            return order_by_id[0]
+    @staticmethod
+    async def get_customer_by_id(session: AsyncSession, id_customer: int) -> Union[Customer, None]:
+        """
+        Get information about customer by id
+        """
+
+        stmt = select(Customer).where(Customer.id == id_customer)
+        information_about_customer = (await session.execute(stmt)).one_or_none()
+
+        if information_about_customer:
+            return information_about_customer[0]
         return None
 
     @staticmethod
-    async def get_all_orders(session: AsyncSession) -> List[Order, List]:
+    async def update_rating_customer(session: AsyncSession, id_customer: int, rating: int) -> bool:
         """
-        Find all orders
-        """
-
-        stmt = select(Order)
-        all_orders = (await session.execute(stmt)).fetchall()
-        return all_orders
-
-    @staticmethod
-    async def get_order_by_status(session: AsyncSession, status: str ) -> Union[List[Order], List]:
-        """
-        Find all orders by status
+        Update rating customer
         """
 
-        stmt = select(Order).where(Order.status == True)
-        all_order_by_status = (await session.execute(stmt)).fetchall()
-        return all_order_by_status
+        stmt = select(Customer).where(Customer.id == id_customer)
+        data = (await session.execute(stmt)).one_or_none()
+        if data:
+            stmt = update(Customer).where(Customer.id == id_customer).values(rating=data[0].rating+rating)
+            await session.execute(stmt)
+            await session.commit()
+        return False
 
     @staticmethod
-    async def get_orders_by_id_customer(session: AsyncSession, id_customer: int) -> Union[List[Order], List]:
+    async def update_total_orders_customer(session: AsyncSession, id_customer: int, count_end_order: int = 1) -> bool:
         """
-        Find all orders by id customer
-        """
-
-        stmt = select(Order).where(Order.customer_id == id_customer)
-        all_order_by_customer = (await session.execute(stmt)).fetchall()
-        return all_order_by_customer
-
-    @staticmethod
-    async def update_status_order(session: AsyncSession, status: bool, id_customer: int) -> bool:
-        """
-        Update status order for customer
+        Update total orders customer
         """
 
-        stmt = update(Order).where(Order.customer_id == id_customer).values(status=status)
-        await session.execute(stmt)
-        await session.commit()
-        return True
+        stmt = select(Customer).where(Customer.id == id_customer)
+        data = (await session.execute(stmt)).one_or_none()
+        if data:
+            stmt = update(Customer).where(Customer.id == id_customer).values(total_orders=data[0].total_orders+count_end_order)
+            await session.execute(stmt)
+            await session.commit()
+        return False
 
     @staticmethod
-    async def delete_order(session: AsyncSession, id_customer: int) -> bool:
+    async def update_completed_orders_customer(session: AsyncSession, id_customer: int, count_end_order: int = 1) -> bool:
         """
-        Delete order for customer
+        Update total orders customer
+        """
+
+        stmt = select(Customer).where(Customer.id == id_customer)
+        data = (await session.execute(stmt)).one_or_none()
+        if data:
+            stmt = update(Customer).where(Customer.id == id_customer).values(total_orders=data[0].completed_orders+count_end_order)
+            await session.execute(stmt)
+            await session.commit()
+            return True
+        return False
+
+    @staticmethod
+    async def delete_customer(session: AsyncSession, id_customer: int) -> bool:
+        """
+        Delete customer for id
         """
 
         try:
-            stmt = delete(Order).where(Order.customer_id == id_customer)
+            stmt = delete(Customer).where(Customer.id == id_customer)
             await session.execute(stmt)
             await session.commit()
             return True
