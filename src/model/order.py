@@ -23,7 +23,7 @@ class Order(Base):
     cargo_dimensions: Mapped[float] = mapped_column(name="cargo_dimensions", type_=Double, nullable=False)
     money: Mapped[float] = mapped_column(name="money", type_=Double, nullable=True)
     description: Mapped[str] = mapped_column(name="description", type_=Text, nullable=True)
-    status: Mapped[str] = mapped_column(name="status", type_=BOOLEAN, nullable=True)
+    status: Mapped[bool] = mapped_column(name="status", type_=BOOLEAN, nullable=True)
 
     #Foreign key
     driver_id: Mapped[int] = mapped_column(ForeignKey("Driver.id"), type_=Integer, name="id_driver")

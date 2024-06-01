@@ -1,5 +1,5 @@
 #System
-from typing import List, Union
+...
 
 #Other libraries
 from sqlalchemy.ext.asyncio import AsyncSession

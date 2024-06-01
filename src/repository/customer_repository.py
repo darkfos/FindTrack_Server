@@ -1,8 +1,7 @@
 #System
-from typing import List, Union
+...
 
 #Other libraries
-from sqlalchemy import select, update, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 
 #Local

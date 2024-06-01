@@ -2,7 +2,7 @@
 from typing import Sequence, Tuple
 
 #Other libraries
-from sqlalchemy import select, update, delete, Row
+from sqlalchemy import select, Row
 from sqlalchemy.ext.asyncio import AsyncSession
 
 #Local
