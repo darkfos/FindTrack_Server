@@ -1,9 +1,10 @@
-#Other libraries
-from sqlalchemy import Integer, String, DateTime, Text, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+#System
 from typing import Dict
 from datetime import datetime
 
+#Other libraries
+from sqlalchemy import Integer, String, DateTime, Text, ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 #Local
 from src.model.base import Base

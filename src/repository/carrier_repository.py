@@ -1,7 +1,9 @@
+#System
+from typing import List, Union
+
 #Other libraries
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, update, delete
-from typing import List, Union
 
 #Local
 from src.repository.general_sql_repository import GeneralSQLRepository

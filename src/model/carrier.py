@@ -1,8 +1,10 @@
+#System
+from datetime import datetime
+from typing import Dict, List
+
 #Other libraries
 from sqlalchemy import Integer, String, DateTime, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from datetime import datetime
-from typing import Dict, List
 
 #Local
 from src.model.base import Base

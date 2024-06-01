@@ -1,8 +1,9 @@
+#System
+from typing import Dict, List
+
 #Other libraries
 from sqlalchemy import String, Integer, Text, ForeignKey, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from typing import Dict, List
-
 
 #Local
 from src.model.base import Base
