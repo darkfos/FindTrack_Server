@@ -3,6 +3,14 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 
 #Local
 from src.model.base import Base
+
+#Models
+from src.model.customer import Customer
+from src.model.order import Order
+from src.model.driver import Driver
+from src.model.carrier import Carrier
+from src.model.car import Car
+
 from src.config.database_settings import db
 
 

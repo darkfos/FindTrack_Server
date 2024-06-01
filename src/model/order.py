@@ -1,5 +1,5 @@
 #Other libraries
-from sqlalchemy import Double, String, Text, DATE, Integer, ForeignKey, Column
+from sqlalchemy import Double, String, Text, DATE, Integer, ForeignKey, Column, BOOLEAN
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import Dict
 from datetime import datetime
@@ -21,7 +21,7 @@ class Order(Base):
     cargo_dimensions: Mapped[float] = mapped_column(name="cargo_dimensions", type_=Double, nullable=False)
     money: Mapped[float] = mapped_column(name="money", type_=Double, nullable=True)
     description: Mapped[str] = mapped_column(name="description", type_=Text, nullable=True)
-    status: Mapped[str] = mapped_column(name="status", type_=String(150), nullable=True)
+    status: Mapped[str] = mapped_column(name="status", type_=BOOLEAN, nullable=True)
 
     #Foreign key
     driver_id: Mapped[int] = mapped_column(ForeignKey("Driver.id"), type_=Integer, name="id_driver")

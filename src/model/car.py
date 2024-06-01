@@ -1,5 +1,5 @@
 #Other libraries
-from sqlalchemy import String, Integer, Text, ForeignKey
+from sqlalchemy import String, Integer, Text, ForeignKey, Boolean
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from typing import Dict, List
 
@@ -28,12 +28,12 @@ class Car(Base):
                                                              type_=Text, nullable=False)
     photo_trailer_passport_additional: Mapped[str] = mapped_column(name="photo_trailer_passport_additional",
                                                                    type_=Text, nullable=False)
+    workload_car: Mapped[bool] = mapped_column(type_=Boolean, name="workload_car", default=False, nullable=False)
     id_carrier: Mapped[int] = mapped_column(ForeignKey("Carrier.id"), name="id_carrier")
 
     #Relations
     carrier: Mapped["Carrier"] = relationship(back_populates="car_carrier", uselist=False)
     order: Mapped[List["Order"]] = relationship(back_populates="car", uselist=True)
-
 
     def __repr__(self):
 
