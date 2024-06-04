@@ -14,7 +14,6 @@ class Driver(Base):
 
     first_name: Mapped[str] = mapped_column(name="first_name_driver", type_=String(150), nullable=True)
     last_name: Mapped[str] = mapped_column(name="last_name_driver", type_=String(150), nullable=True)
-    #Question
     surname: Mapped[str] = mapped_column(name="surname_driver", type_=String(150), nullable=True)
     passport_series: Mapped[int] = mapped_column(name="passport_series", type_=Integer, nullable=True)
     passport_number: Mapped[int] = mapped_column(name="passport_number", type_=Integer, nullable=True)
